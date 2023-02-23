@@ -1,15 +1,25 @@
-#include "main.h"
+#include <main.h>
 
 /**
  * main - tests function that prints if integer is positive or negative
- * Returns: 0
+ * Return: 0
  */
-int main(void)
+
+int main() 
 
 {
-	int i;
 
-	i = 0;
-	positive_or_negative(i);
-return (0);
+    double num;
+    printf("Enter a number: ");
+    scanf("%lf", &num);
+    if (num <= 0.0) {
+        if (num == 0.0)
+            printf("You entered 0.");
+        else
+            printf("You entered a negative number.");
+    } 
+    else
+        printf("You entered a positive number.");
+
+    return 0;
 }

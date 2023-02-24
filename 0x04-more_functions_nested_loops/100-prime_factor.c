@@ -1,31 +1,23 @@
 #include <stdio.h>
 #include "main.h"
 /**
- * isPrime - analise if a number is prime or not
- * @n: number to check
- * Return: true if it is prime false if not
+ * main - prints the largest prime factor of the number 612852475143
+ * Return: Always 0 (success)
  */
-int isPrime(long int n)
-{
-	int i;
+int main(void)
 
-	if (n <= 1)
+{
+	long x, maxf;
+	long number = 612852475143;
+	double square = sqrt(number);
+
+	for (x = 1; x <= square; x++)
 	{
-		return (0);
-	}
-	else if (n == 2)
+	if (number % x == 0)
 	{
-		return (1);
+	maxf = number / x;
 	}
-	else
-	{
-		for (i = 2; i < n; i++)
-		{
-			if (n % i == 0)
-			{
-				return (0);
-			}
-		}
-	return (1);
 	}
+	printf("%ld\n", maxf);
+	return (0);
 }

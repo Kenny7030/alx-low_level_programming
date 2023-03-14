@@ -1,57 +1,51 @@
-#include "main.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
- * strtow - a function that splits a string into words.
- * @str: string
+ * **strtow - splits a string into words
  *
- * Each element of this array should contain a single word, null-terminated
- * The last element of the returned array should be NULL
- * Words are separated by spaces
- * Returns NULL if str == NULL or str == ""
- *
- * Return: a pointer to an array of strings (words)
+ * @str: string to split
+ * Return: pointer to array of strings, or NULL if fail
  */
-
 char **strtow(char *str)
 {
-	char **strw;
-	int i = 0, j, p = 0, l, n;
+	char **a;
+	int i, k, n, word_count = 0, word_len = 0, current_word = 0;
 
 	if (str == NULL || *str == '\0')
 		return (NULL);
-
-	l = strlen(str);
-	strw = malloc(l * sizeof(char *));
-	if (strw == NULL)
+	for (i = 0; *(str + i) != '\0'; i++)
 	{
-		free(strw);
-		return (NULL);
-	}
-
-	while (str[i] != '\0')
-	{
-		if (str[i] != ' ' && str[i - 1] == ' ')
-		{
-			j = 1;
-			while (str[i + j] != ' ')
-				j++;
-			strw[p] = malloc(j * sizeof(char));
-			if (strw[p] == NULL)
-			{
-				while (p--)
-					free(strw[p]);
-				free(strw);
-				return (NULL);
-			}
-			for (n = 0; n < j; n++)
-				strw[p][n] = str[i + n];
-			strw[p][n] = '\0';
-			p++;
-			i += j;
-		}
-		else
+		if (*(str + i) != ' ')
+			word_count++;
+		while (*(str + i) != ' ' && *(str + i))
 			i++;
+		if (!*(str + i))
+			break;
 	}
-	strw[p] = NULL;
-	return (strw);
+	if (word_count == 0)
+		return (NULL);
+	a = malloc(sizeof(char *) * (word_count + 1));
+	if (a == NULL)
+		return (NULL);
+	for (i = 0, k = i; current_word < word_count; i++, word_len = 0, k = i)
+	{
+		if (*(str + i) == ' ')
+			continue;
+		while (*(str + k) != ' ' && *(str + k++))
+			word_len++;
+		a[current_word] = malloc(sizeof(char) * word_len + 1);
+		if (!a[current_word])
+		{
+			while (current_word-- >= 0)
+				free(a[current_word]);
+			free(a);
+			return (NULL);
+		}
+		for (n = 0; i < k; i++, n++)
+			a[current_word][n] = *(str + i);
+		a[current_word++][n] = '\0';
+	}
+	a[word_count] = NULL;
+	return (a);
 }

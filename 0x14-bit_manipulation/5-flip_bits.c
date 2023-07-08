@@ -3,8 +3,8 @@
 /**
  * flip_bits - Return number of bits to be flipped
  *
- * @n: The first number
- * @m: The second number
+ * @n: first number
+ * @m: second number
  *
  * Return: Number of bits to flip to convert the numbers
  */
@@ -15,8 +15,9 @@ unsigned int flip_bits(unsigned long int n, unsigned long int m)
 
 	while (xorval)
 	{
-		count += xorval & 1ul;
-		xorval >>= 1;
+		if (xorval & 1ul)
+			count++;
+		xorval = xorval >> 1
 	}
 
 	return count;

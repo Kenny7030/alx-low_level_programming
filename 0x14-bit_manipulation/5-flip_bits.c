@@ -15,7 +15,7 @@ unsigned int flip_bits(unsigned long int n, unsigned long int m)
 
 	while (xorval)
 	{
-		count += xorval & 1;
+		count += xorval & 1ul;
 		xorval >>= 1;
 	}
 

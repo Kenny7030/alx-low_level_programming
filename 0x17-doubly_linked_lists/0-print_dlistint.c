@@ -1,27 +1,23 @@
-#ifndef _LISTS_
-#define _LISTS_
-
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include "lists.h"
 
 /**
- * struct dlistint_s - doubly linked list
- * @n: integer
- * @prev: points to the previous node
- * @next: points to the next node
- *
- * Description: doubly linked list node structure
- * for Holberton project
+ * print_dlistint - Prints all the elements of a dlistint_t list
+ * @h: Pointer to the head of the list
+ * Return: The number of nodes
  */
-typedef struct dlistint_s
+size_t print_dlistint(const dlistint_t *h)
 {
-    int n;
-    struct dlistint_s *prev;
-    struct dlistint_s *next;
-} dlistint_t;
+    size_t node_count = 0;
 
-size_t print_dlistint(const dlistint_t *h);
-/* Other function prototypes here */
+    while (h != NULL)
+    {
+        printf("%d\n", h->n);
+        h = h->next;
+        node_count++;
+    }
 
-#endif
+    return node_count;
+}
 
